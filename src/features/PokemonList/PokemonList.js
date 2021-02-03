@@ -1,10 +1,12 @@
 import _ from 'lodash';
 import { useState, useEffect } from 'react';
-import { getNext, getPokemons } from '../../api/pokemon';
+import { get, getPokemons } from '../../api/pokemon';
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
+import ListItemAvatar from '@material-ui/core/ListItemAvatar';
 import ListItemText from '@material-ui/core/ListItemText';
 import { makeStyles } from '@material-ui/core/styles';
+import PokemonAvatar from './PokemonAvatar';
 
 const useStyles = makeStyles(() => ({
   root: {
@@ -28,7 +30,7 @@ const PokemonList = () => {
   };
 
   const loadMoreHandler = async () => {
-    const data = await getNext(loadMoreUrl);
+    const data = await get(loadMoreUrl);
     setPokemons([...pokemons, ...data.results]);
     setLoadMoreUrl(data.next);
   };
@@ -51,6 +53,9 @@ const PokemonList = () => {
         {
         _.map(pokemons, (pokemon) => (
           <ListItem button>
+            <ListItemAvatar>
+              <PokemonAvatar url={pokemon.url} />
+            </ListItemAvatar>
             <ListItemText primary={_.capitalize(pokemon.name)} />
           </ListItem>
         ))
