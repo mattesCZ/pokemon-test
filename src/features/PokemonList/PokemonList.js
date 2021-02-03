@@ -52,7 +52,7 @@ const PokemonList = ({setPokemon}) => {
       <List>
         {
         _.map(pokemons, (pokemon) => (
-          <ListItem button onClick={() => setPokemon(pokemon.url)}>
+          <ListItem key={pokemon.url} button onClick={() => setPokemon(pokemon.url)}>
             <ListItemAvatar>
               <PokemonAvatar url={pokemon.url} />
             </ListItemAvatar>
