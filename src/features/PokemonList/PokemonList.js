@@ -6,7 +6,7 @@ import ListItem from '@material-ui/core/ListItem';
 import ListItemAvatar from '@material-ui/core/ListItemAvatar';
 import ListItemText from '@material-ui/core/ListItemText';
 import { makeStyles } from '@material-ui/core/styles';
-import PokemonAvatar from './PokemonAvatar';
+import PokemonAvatar from '../PokemonAvatar/PokemonAvatar';
 
 const useStyles = makeStyles(() => ({
   root: {
@@ -18,7 +18,7 @@ const useStyles = makeStyles(() => ({
   },
 }));
 
-const PokemonList = () => {
+const PokemonList = ({setPokemon}) => {
   const classes = useStyles();
   const [pokemons, setPokemons] = useState(null);
   const [loadMoreUrl, setLoadMoreUrl] = useState(null);
@@ -52,7 +52,7 @@ const PokemonList = () => {
       <List>
         {
         _.map(pokemons, (pokemon) => (
-          <ListItem button>
+          <ListItem button onClick={() => setPokemon(pokemon.url)}>
             <ListItemAvatar>
               <PokemonAvatar url={pokemon.url} />
             </ListItemAvatar>
